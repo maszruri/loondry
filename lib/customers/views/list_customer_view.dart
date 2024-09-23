@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:loondry/customers/models/customer_model.dart';
 import 'package:loondry/customers/view_models/customer_viewmodel.dart';
-import 'package:loondry/customers/views/form_customer_view.dart';
-import 'package:loondry/customers/widgets/customer_list_view.dart';
+import 'package:loondry/customers/views/widgets/customer_list_view.dart';
+import 'package:loondry/customers/views/widgets/show_customer_form.dart';
 import 'package:provider/provider.dart';
 
 class ListCustomerView extends StatefulWidget {
@@ -15,6 +16,7 @@ class _ListCustomerViewState extends State<ListCustomerView> {
   @override
   void initState() {
     Future.microtask(
+      // ignore: use_build_context_synchronously
       () => context.read<CustomerViewmodel>().getCustomers(),
     );
     super.initState();
@@ -45,11 +47,14 @@ class _ListCustomerViewState extends State<ListCustomerView> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const FormCustomerView(),
-          ),
-        ),
+        onPressed: () async {
+          final CustomerModel? customer = await showCustomerForm(context, null);
+          if (customer != null) {
+            if (context.mounted) {
+              context.read<CustomerViewmodel>().createCustomer(customer);
+            }
+          }
+        },
         child: const Icon(Icons.add),
       ),
     );

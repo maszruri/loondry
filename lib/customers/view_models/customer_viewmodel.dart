@@ -31,16 +31,17 @@ class CustomerViewmodel extends ChangeNotifier {
   }
 
   createCustomer(CustomerModel customer) async {
-    setLoading(true);
     await CustomerService.createCustomer(customer);
     getCustomers();
-    setLoading(false);
   }
 
   deleteCustomer(CustomerModel customer) async {
-    setLoading(true);
     await CustomerService.deleteCustomer(customer.id!);
     getCustomers();
-    setLoading(false);
+  }
+
+  updateCustomer(CustomerModel customer) async {
+    await CustomerService.updateCustomer(customer);
+    getCustomers();
   }
 }

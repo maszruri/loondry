@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:loondry/customers/models/customer_model.dart';
 import 'package:loondry/customers/view_models/customer_viewmodel.dart';
-import 'package:loondry/customers/views/form_customer_view.dart';
+import 'package:loondry/customers/views/widgets/show_customer_form.dart';
+import 'package:provider/provider.dart';
 
 class CustomerListView extends StatelessWidget {
   final CustomerViewmodel viewmodel;
@@ -22,15 +26,19 @@ class CustomerListView extends StatelessWidget {
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
-                onPressed: (context) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => FormCustomerView(
-                        customer: customer,
-                      ),
-                    ),
-                  );
+                onPressed: (context) async {
+                  final CustomerModel? customerModel =
+                      await showCustomerForm(context, customer);
+                  if (customerModel != null) {
+                    if (context.mounted) {
+                      log(customerModel.name.toString());
+                      context
+                          .read<CustomerViewmodel>()
+                          .updateCustomer(customerModel);
+                    }
+                  }
                 },
+                autoClose: false,
                 backgroundColor: const Color(0xFF21B7CA),
                 foregroundColor: Colors.white,
                 icon: Icons.edit,
@@ -49,7 +57,7 @@ class CustomerListView extends StatelessWidget {
           ),
           child: ListTile(
             title: Text(customer.name!),
-            subtitle: Text(customer.phone!),
+            subtitle: Text(customer.id!.toString()),
           ),
         );
       },

@@ -29,4 +29,19 @@ class CategoriesViewmodel extends ChangeNotifier {
     setCategories(categories);
     setLoading(false);
   }
+
+  createCategories(CategoriesModel categories) async {
+    await CategoriesService.createCategories(categories);
+    getCategories();
+  }
+
+  updateCategories(CategoriesModel categories) async {
+    await CategoriesService.updateCategories(categories);
+    getCategories();
+  }
+
+  deleteCategories(CategoriesModel categories) async {
+    await CategoriesService.deleteCategories(categories.id!);
+    getCategories();
+  }
 }
