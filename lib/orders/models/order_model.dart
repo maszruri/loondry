@@ -1,29 +1,38 @@
 class OrderModel {
   int? id;
   String? customerName;
-  int? customerPhone;
-  String? dateCreated;
-  String? timeCreated;
-  String? category;
-  String? estimatedCompletionDate;
+  String? customerPhone;
+  String? categoriesName;
+  int? categoriesPrice;
+  int? categoriesDuration;
+  num? weight;
+  int? totalPrice;
+  String? startedAt;
+  String? finisedAt;
 
   OrderModel(
       {this.id,
       this.customerName,
       this.customerPhone,
-      this.dateCreated,
-      this.timeCreated,
-      this.category,
-      this.estimatedCompletionDate});
+      this.categoriesName,
+      this.categoriesPrice,
+      this.categoriesDuration,
+      this.weight,
+      this.totalPrice,
+      this.startedAt,
+      this.finisedAt});
 
   OrderModel.fromMap(Map<String, dynamic> map) {
     id = map['id'];
     customerName = map['customerName'];
     customerPhone = map['customerPhone'];
-    dateCreated = map['dateCreated'];
-    timeCreated = map['timeCreated'];
-    category = map['category'];
-    estimatedCompletionDate = map['estimatedCompletionDate'];
+    categoriesName = map['categoriesName'];
+    categoriesPrice = map['categoriesPrice'];
+    categoriesDuration = map['categoriesDuration'];
+    weight = map['weight'];
+    totalPrice = map['totalPrice'];
+    startedAt = map['startedAt'];
+    finisedAt = map['finisedAt'];
   }
 
   Map<String, dynamic> toMap() {
@@ -31,10 +40,13 @@ class OrderModel {
     data['id'] = id;
     data['customerName'] = customerName;
     data['customerPhone'] = customerPhone;
-    data['dateCreated'] = dateCreated;
-    data['timeCreated'] = timeCreated;
-    data['category'] = category;
-    data['estimatedCompletionDate'] = estimatedCompletionDate;
+    data['categoriesName'] = categoriesName;
+    data['categoriesPrice'] = categoriesPrice;
+    data['categoriesDuration'] = categoriesDuration;
+    data['weight'] = weight;
+    data['totalPrice'] = totalPrice;
+    data['startedAt'] = startedAt;
+    data['finisedAt'] = finisedAt;
     return data;
   }
 }

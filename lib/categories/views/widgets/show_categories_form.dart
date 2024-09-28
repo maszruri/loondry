@@ -39,9 +39,9 @@ Future showCategoriesForm(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Create Categories",
-              style: TextStyle(fontSize: 20),
+            Text(
+              "${categories == null ? "Add" : "Edit"} Categories",
+              style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 10),
             TextFormField(

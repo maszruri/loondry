@@ -42,22 +42,27 @@ class CustomerListView extends StatelessWidget {
                 backgroundColor: const Color(0xFF21B7CA),
                 foregroundColor: Colors.white,
                 icon: Icons.edit,
-                label: 'Edit',
               ),
               SlidableAction(
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(12),
+                  bottomRight: Radius.circular(12),
+                ),
                 onPressed: (context) {
                   viewmodel.deleteCustomer(customer);
                 },
                 backgroundColor: const Color(0xFFFE4A49),
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
-                label: 'Delete',
               ),
             ],
           ),
-          child: ListTile(
-            title: Text(customer.name!),
-            subtitle: Text(customer.id!.toString()),
+          child: Card(
+            color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+            shape: RoundedRectangleBorder(),
+            child: ListTile(
+              title: Text(customer.name!),
+            ),
           ),
         );
       },

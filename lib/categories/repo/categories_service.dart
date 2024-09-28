@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loondry/categories/models/categories_model.dart';
-import 'package:loondry/core/databases/sqlite_db.dart';
+import 'package:loondry/shared/local_storage/sqlite_db.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
 class CategoriesService {

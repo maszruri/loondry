@@ -37,7 +37,7 @@ Future showCustomerForm(BuildContext context, CustomerModel? customer) async {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${customer == null ? "Create" : "Edit"} Customer",
+              "${customer == null ? "Add" : "Edit"} Customer",
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 10),

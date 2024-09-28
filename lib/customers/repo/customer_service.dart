@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loondry/core/databases/sqlite_db.dart';
+import 'package:loondry/shared/local_storage/sqlite_db.dart';
 import 'package:loondry/customers/models/customer_model.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 

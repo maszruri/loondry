@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:loondry/customers/models/customer_model.dart';
 import 'package:loondry/customers/view_models/customer_viewmodel.dart';
 import 'package:loondry/customers/views/widgets/customer_list_view.dart';
-import 'package:loondry/customers/views/widgets/show_customer_form.dart';
 import 'package:provider/provider.dart';
 
 class ListCustomerView extends StatefulWidget {
@@ -24,38 +22,46 @@ class _ListCustomerViewState extends State<ListCustomerView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Consumer<CustomerViewmodel>(
+    return SafeArea(
+      child: Consumer<CustomerViewmodel>(
         builder: (context, value, child) {
           if (value.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
-            if (value.customers.isEmpty) {
-              return const Center(
-                child: Text(
-                  "No Data",
-                  style: TextStyle(color: Colors.black),
-                ),
-              );
-            } else {
-              return CustomerListView(viewmodel: value);
-            }
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 1 / 6,
+                  ),
+                  const Text(
+                    "Customer",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  const Divider(),
+                  Expanded(
+                    child: value.customers.isEmpty
+                        ? child!
+                        : OverflowBox(
+                            maxWidth: MediaQuery.of(context).size.width,
+                            child: CustomerListView(viewmodel: value),
+                          ),
+                  ),
+                ],
+              ),
+            );
           }
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final CustomerModel? customer = await showCustomerForm(context, null);
-          if (customer != null) {
-            if (context.mounted) {
-              context.read<CustomerViewmodel>().createCustomer(customer);
-            }
-          }
-        },
-        child: const Icon(Icons.add),
+        child: const Center(
+          child: Text(
+            "No Customer",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
       ),
     );
   }

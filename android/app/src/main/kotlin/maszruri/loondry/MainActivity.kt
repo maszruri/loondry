@@ -1,4 +1,4 @@
-package maszruri.loondry
+package com.maszruri.loondry
 
 import io.flutter.embedding.android.FlutterActivity
 

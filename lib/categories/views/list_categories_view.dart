@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:loondry/categories/models/categories_model.dart';
 import 'package:loondry/categories/view_models/categories_viewmodel.dart';
 import 'package:loondry/categories/views/widgets/categories_list_view.dart';
-import 'package:loondry/categories/views/widgets/show_categories_form.dart';
 import 'package:provider/provider.dart';
 
 class ListCategoriesView extends StatefulWidget {
@@ -37,25 +35,13 @@ class _ListCategoriesViewState extends State<ListCategoriesView> {
           } else {
             if (viewmodel.categories.isEmpty) {
               return const Center(
-                child: Text("No Data"),
+                child: Text("No Categories"),
               );
             } else {
               return CategoriesListView(viewmodel: viewmodel);
             }
           }
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final CategoriesModel? categories =
-              await showCategoriesForm(context, null);
-          if (categories != null) {
-            if (context.mounted) {
-              context.read<CategoriesViewmodel>().createCategories(categories);
-            }
-          }
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }
